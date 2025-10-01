@@ -11,9 +11,8 @@ WORKING_DIR=$1
 DELIM='.'
 
 quickpartition(){
-	echo
-	echo "-----------------------------------------"
-	echo
+	
+	echo -en "\n-----------------------------------------\n\n"
 }
 
 #if [ -z $PROCESSOR_SCRIPT ]
@@ -84,6 +83,7 @@ echo "${ext_arr[*]}"
 #Sorting files with extensions and no extensions
 OLDIFS=$IFS
 IFS=$'\n'
+
 echo
 for ext in "${ext_arr[@]}";do
 	
@@ -101,10 +101,9 @@ for ext in "${ext_arr[@]}";do
 	done
 	[ $found -eq 1 ] && ext_arr_list+=($arrname)
 done
+
 echo
 echo "LIST OF FILES PER EXTENSION:"
-
-
 for arr in "${ext_arr_list[@]}"; do
 	
 	echo
@@ -114,8 +113,8 @@ for arr in "${ext_arr_list[@]}"; do
 	eval "printf \"%s\n\" \"\${$arr[@]}\""
 
 done
-echo
 
+echo
 for i in "${all_files[@]}"; do
 	found=0
 	for j in "${all_ext_array[@]}"; do
@@ -127,8 +126,8 @@ for i in "${all_files[@]}"; do
 	[ $found -eq 0 ] && non_ext_files+=($i)		
 done
 IFS=$OLDIFS
-echo
 
+echo
 echo "Files Without Any OR Ambiguos Extension : ${#non_ext_files[@]}"
 printf "%s\n" "${non_ext_files[@]}"
 
@@ -154,4 +153,4 @@ quickpartition
 # Trap a kill and do any clean up necessary or simply trap for fun
 # No headers or info - just output - use a flag && echo 
 # Full path or only the current path - based on $WORKING_DIR or cd to $WORKING_DIR set path based on flag
-
+# Only display the count or only display the files - simple variable in the loop for printing LIST OF FILES PER EXTENSION
